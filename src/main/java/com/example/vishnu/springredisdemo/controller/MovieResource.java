@@ -28,10 +28,14 @@ public class MovieResource {
 	
 	@GetMapping("/update/{id}/{name}")
 	public Movie update(@PathVariable("id") final String id, @PathVariable("name") final String name) {
-		movieRepo.update(new Movie(id, name, 20000L));
+		movieRepo.update(new Movie(id, name, 10000L));
 		return movieRepo.getById(id);
 	}
-	
+	@GetMapping("/delete/{id}")
+	public Map<String, Movie> delete(@PathVariable("id") final String id) {
+		movieRepo.delete(id);
+		return getAll();
+	}
 	@GetMapping("/")
 	public Map<String, Movie> getAll() {
 		return movieRepo.findAll();
